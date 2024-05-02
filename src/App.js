@@ -1,10 +1,10 @@
-import logo from './logo.svg';
+
 import './App.css';
 import CameraApp from './camera';
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <CameraApp />
     </div>
   );

@@ -1,12 +1,26 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const CameraApp = () => {
   const videoRef = useRef(null);
 
+  const [previewPhoto, setPreviewPhoto] = useState([])
+
   const startCamera = async () => {
-    const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+    const stream = await navigator.mediaDevices.getUserMedia({
+      video: { facingMode: "user" }
+    });
     videoRef.current.srcObject = stream;
+
   };
+
+
+  useEffect(() => {
+    startCamera()
+
+  }, [])
+  const addPhoto = (photoData) => {
+    setPreviewPhoto([...previewPhoto, photoData]);
+  }
 
   const takePhoto = () => {
     const canvas = document.createElement('canvas');
@@ -16,19 +30,29 @@ const CameraApp = () => {
     canvas.height = videoRef.current.videoHeight;
 
     ctx.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
-
+    ctx.fillStyle = 'yellow';
+    ctx.font = '20px Arial';
+    ctx.fillText(new Date().toDateString(), 10, canvas.height - 10);
     const photoURL = canvas.toDataURL('image/png');
-    const a = document.createElement('a');
-    a.download = 'photo.png';
-    a.href = photoURL;
-    a.click();
+
+    addPhoto(photoURL);
+
+
+
   };
 
   return (
-    <div>
-      <video ref={videoRef} autoPlay></video>
-      <button onClick={startCamera}>Start Camera</button>
-      <button onClick={takePhoto}>Take Photo</button>
+    <div className='camera'>
+
+      <video ref={videoRef} autoPlay > </video>
+
+
+      <button className='chic' onClick={takePhoto}></button>
+
+
+      {/* {previewPhoto.map((photo) => (
+        <img key={photo} src={photo} alt="Uploaded" />
+      ))} */}
     </div>
   );
 };
