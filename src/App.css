@@ -1,11 +1,12 @@
 .chic {
-  height: 80px;
-  width: 80px;
+  height: 60px;
+  width: 60px;
   background: #FFFFFF;
   border-radius: 50%;
   position: absolute;
   top: 80%;
-  left: 50%;
+  left: 40%;
+  border: 3px solid rgb(62, 62, 61);
 }
 
 .chic:active {

@@ -42,9 +42,9 @@ const CameraApp = () => {
   };
 
   return (
-    <div className='camera'>
+    <div >
 
-      <video ref={videoRef} autoPlay > </video>
+      <video className='camera' ref={videoRef} autoPlay > </video>
 
 
       <button className='chic' onClick={takePhoto}></button>
