@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-const CameraApp = () => {
+const CameraApp = ({ previewPhoto, setPreviewPhoto }) => {
   const videoRef = useRef(null);
 
-  const [previewPhoto, setPreviewPhoto] = useState([])
+
 
   const startCamera = async () => {
     const stream = await navigator.mediaDevices.getUserMedia({
@@ -18,6 +18,8 @@ const CameraApp = () => {
     startCamera()
 
   }, [])
+
+
   const addPhoto = (photoData) => {
     setPreviewPhoto([...previewPhoto, photoData]);
   }
@@ -50,9 +52,7 @@ const CameraApp = () => {
       <button className='chic' onClick={takePhoto}></button>
 
 
-      {/* {previewPhoto.map((photo) => (
-        <img key={photo} src={photo} alt="Uploaded" />
-      ))} */}
+
     </div>
   );
 };
